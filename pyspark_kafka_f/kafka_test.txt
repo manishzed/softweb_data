@@ -1,0 +1,22 @@
+create topic:
+
+/home/manishmehta/Documents/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic TutorialTopic_v2.1
+
+/home/manishmehta/Documents/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic TutorialTopic_v2
+
+/home/manishmehta/Documents/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic pkttest
+
+
+create producer:
+1>
+echo "Hello, World" | /home/manishmehta/Documents/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic TutorialTopic_v2 > /dev/null
+
+2> 
+
+echo "Hello World from data science team" | /home/manishmehta/Documents/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic TutorialTopic_v2 > /dev/null
+
+create consumer:
+
+/home/manishmehta/Documents/spark-3.3.0-bin-hadoop3/bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0 consumer_test_v2.py 
+
+

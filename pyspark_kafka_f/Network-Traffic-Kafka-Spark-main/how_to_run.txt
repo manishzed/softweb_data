@@ -1,0 +1,23 @@
+#stream data with kafka producer and pyspark used to consume data, finally display dataframe in console:
+
+step 1:
+
+create topic "demo":
+
+/home/manishmehta/Documents/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic pkttest
+
+
+
+step 2:
+
+run producer
+
+
+python pkt-producer-pcap.py
+
+
+step 3:
+
+run consumer
+
+/home/manishmehta/Documents/spark-3.3.0-bin-hadoop3/bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0 spark-consumer-pcap.py
