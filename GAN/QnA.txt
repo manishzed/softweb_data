@@ -1,0 +1,83 @@
+1>hyperparametars list
+a> activations: LeakyReLU, tanh, sigmoid
+b> loss: binary_crossentropy
+c> optimizers: RMSprop
+D> Dropout regularization 
+LATENT_DIM = 32
+CHANNELS = 3
+CONTROL_SIZE_SQRT = 6
+WIDTH = 128
+HEIGHT = 128
+iters = 15000
+batch_size = 16
+ RMSprop(
+        lr=.0001,
+        clipvalue=1.0,
+        decay=1e-8)
+
+
+2> backbone network: DCGAN - Deep Convolutional Generative Adversarial Network
+ It is a Deep convolutional GAN. It is one of the most used, powerful, and successful types of GAN architecture. 
+ It is implemented with help of ConvNets in place of a Multi-layered perceptron. 
+ The ConvNets use a convolutional stride and are built without max pooling and layers in this network are not completely connected.
+ 
+3>epochs number:24
+images: 10000
+no. of batches: 16
+total iterations: 15000
+
+eg: 10000/16=625
+15000/625=24
+
+
+EPOCH:It is the number of times the whole training dataset is passed through the model. So in one epoch every data point has passed the model once.
+
+BATCH:An epoch can have number of batches. And one batch epoch is called Batch GD, so in this case whole dataset is passed through the model at one go and the optimization also is allowed only once. So basically a batch size is the number of data point after the model gets updated.
+
+ITERATIONS:Its the number of batches required to complete one epoch.
+
+4>how to improve network:
+a> by tuning hyperparametear:like addding batchnormalizations, increasing no. of iterations, increasing no. of layers, changing optimizers
+b> progressive GAN , 
+c>Super Resolution Generative Adversarial Networks (SR GANs)
+d> Vanilla GAN
+
+5> whats different in gan as other:
+Transposed Convolutions also use filters to process the data, but their goal is the opposite of a regular Convolution. I.e.,
+we use them to upsample the data to a larger output feature map, while regular Convolutions downsample.
+
+ 
+ GANs typically work with image data and use Convolutional Neural Networks, (CNNs). 
+ A CNN architecture is composed of convolutional layer with ReLU, pooling layer, and lastly fully connected Dense layers.
+
+1>Replace any pooling layer with strided convolution in discriminator and fractional-strided convolusions in generator i.e. no more pooling layer. 
+So instead of the pooling layer sliding over the kernel one by one, a strided convolution jumps multiple pixels from one convolution layer to the next, 
+thereby decreasing the dimension.
+2>Remove fully connected hidden layers Dense so that each output are directly connected to the next convolution layer.
+3>Use LeakyReLU activation in generator for all layers expect for the output, which uses tanh.
+4>Use LeakyReLU activation in the discriminator for all layers.
+
+the Discriminator model is just a Convolutional classification model. 
+In contrast, the Generator model is more complex as it learns to convert latent inputs into an actual image with the help of Transposed and regular Convolutions.
+
+  
+  
+  
+  
+  
+basics:
+--create a Generator
+The generator goes the other way: It is the artist who is trying to fool the discriminator. 
+This network consists of 8 convolutional layers. Here first, we take our input, called gen_input and feed it into our first convolutional layer. 
+Each convolutional layer performs a convolution and then performs batch normalization and a leaky ReLu as well. 
+Then, we return the tanh activation function.
+
+	architecture:
+	generator architecture, this generator architecture takes a vector of size 32 and first reshape that into (16, 16, 128)) vector and then, 
+	it applies transpose convolution on that reshaped image in combination with batch normalization. The output of this generator is a trained image of dimension (128, 128, 3).
+--create a Discriminator
+The discriminator network consists of convolutional layers the same as the generator. For every layer of the network, we are going to perform a convolution, 
+then we are going to perform batch normalization to make the network faster and more accurate and finally, we are going to perform a Leaky ReLu.
+
+--GAN:
+GAN model can be defined that combines both the generator model and the discriminator model into one larger model
